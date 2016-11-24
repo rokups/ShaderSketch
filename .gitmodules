@@ -1,0 +1,3 @@
+[submodule "dep/AtomicGameEngine"]
+	path = dep/AtomicGameEngine
+	url = git@github.com:AtomicGameEngine/AtomicGameEngine.git
