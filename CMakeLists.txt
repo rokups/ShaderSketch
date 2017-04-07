@@ -22,15 +22,17 @@
 cmake_minimum_required(VERSION 2.8.12.1)
 project(ShaderSketch)
 
-set (ATOMIC_CPLUSPLUS_EXAMPLES 0)
+# Disable various Atomic features. 'CACHE BOOL "" FORCE' is required for options declared with cmake `option()` call.
+set(ATOMIC_CPLUSPLUS_EXAMPLES 0 CACHE BOOL "" FORCE)
+set(ATOMIC_WEBVIEW 0 CACHE BOOL "" FORCE)
+set(ATOMIC_JAVASCRIPT 0 CACHE BOOL "" FORCE)
+set(ATOMIC_DOTNET 0 CACHE BOOL "" FORCE)
+set(ATOMIC_EDITOR 0 CACHE BOOL "" FORCE)
+# Add game engine to the project.
 add_subdirectory(dep/AtomicGameEngine)
-
-include_directories(${ATOMIC_INCLUDE_DIRS})
-add_definitions(${ATOMIC_DEFINITIONS})
-
+# Define our own project
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
-
 set(SOURCE_FILES main.cpp)
-
 add_executable(ShaderSketch ${SOURCE_FILES})
-target_link_libraries (ShaderSketch ${ATOMIC_LINK_LIBRARIES})
+# Link engine to our project. It pulls in engine defines and include directories automatically.
+target_link_libraries (ShaderSketch Atomic)
